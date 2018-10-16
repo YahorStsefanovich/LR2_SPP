@@ -1,6 +1,7 @@
 ﻿using PluginInterfaces;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -9,9 +10,76 @@ using System.Threading.Tasks;
 
 namespace LR2_SPP
 {
-     class Faker
+     class Faker : IGenerator, IGeneratorWithValue
      {
           private Random random = new Random((int)DateTime.Now.Ticks);
+
+          public T Create<T>() where T : class, new(){
+               Type type = typeof(T).GetType();
+
+               //find constructors with max amount of parameters
+               ConstructorInfo[] constructors = type.GetConstructors();
+               if (constructors.Length > 0)
+               {
+                    ConstructorInfo maxConstructor = constructors[0];
+                    int maxLength = maxConstructor.GetParameters().Length;
+                    foreach (ConstructorInfo constructor in constructors)
+                    {
+                         if (constructor.GetParameters().Length > maxLength)
+                         {
+                              maxLength = constructor.GetParameters().Length;
+                              maxConstructor = constructor;
+                         }
+                    }
+
+                    object obj = maxConstructor.Invoke(maxConstructor, maxConstructor.GetParameters());
+                    return (T)obj;
+               }
+               else
+               {
+                    object obj = new T();
+                    //fill in fields with piblic fields 
+                    FieldInfo[] fieldNames = type.GetFields();
+                    foreach (FieldInfo field in fieldNames)
+                    {
+                         if (field.GetType() == typeof(int))
+                         {                             
+                              field.SetValue(obj, generateInt());
+                         }
+                         else if (field.GetType() == typeof(string))
+                         {
+                              field.SetValue(obj, generateString());
+                         }
+                         else if (field.GetType() == typeof(char))
+                         {
+                              field.SetValue(obj, generateChar());
+                         }
+                         else if (field.GetType() == typeof(byte))
+                         {
+                              field.SetValue(obj, generateByte());
+                         }
+                         else if (field.GetType() == typeof(long))
+                         {
+                              field.SetValue(obj, generateLong());
+                         }
+                         else if (field.GetType() == typeof(bool))
+                         {
+                              field.SetValue(obj, generateBoolean());
+                         }
+                         else if (field.GetType() == typeof(double))
+                         {
+                              field.SetValue(obj, generateDouble());
+                         }
+                         else if (field.GetType() == typeof(float))
+                         {
+                              field.SetValue(obj, generateFloat());
+                         }
+                         
+                    }
+                    return (T)obj;
+               }            
+                                             
+          }
 
           public DateTime generateDateTime()
           {
