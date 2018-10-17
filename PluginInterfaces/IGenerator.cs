@@ -8,6 +8,7 @@ namespace PluginInterfaces
 {
      public interface IGenerator
      {
-          int generateInt();
+          object generateValue();
+          Type GetValueType();
      }
 }

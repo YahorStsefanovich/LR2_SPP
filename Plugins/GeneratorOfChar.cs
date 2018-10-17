@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace Plugins
 {
-    public class Plugins : IGenerator
-    {
+     class GeneratorOfChar : IGenerator
+     {
           private Random random = new Random((int)DateTime.Now.Ticks);
 
           public object generateValue()
           {
-               return (Int32)random.Next();
+               return (Char)random.Next();
           }
 
-          public object generateInt(int value)
+          public Type GetValueType()
           {
-               return (Int32)random.Next(value);
+               return typeof(Char);
           }
      }
 }

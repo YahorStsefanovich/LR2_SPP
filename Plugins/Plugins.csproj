@@ -40,6 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GeneratorOfBoolean.cs" />
+    <Compile Include="GeneratorOfByte.cs" />
+    <Compile Include="GeneratorOfChar.cs" />
+    <Compile Include="GeneratorOfDouble.cs" />
+    <Compile Include="GeneratorOfFloat.cs" />
+    <Compile Include="GeneratorOfInt.cs" />
+    <Compile Include="GeneratorOfLong.cs" />
+    <Compile Include="GeneratorOfShort.cs" />
+    <Compile Include="GeneratorOfString.cs" />
     <Compile Include="Plugins.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

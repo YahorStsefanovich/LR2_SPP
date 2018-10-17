@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace Plugins
 {
-    public class Plugins : IGenerator
-    {
+     class GeneratorOfDouble : IGenerator
+     {
           private Random random = new Random((int)DateTime.Now.Ticks);
 
           public object generateValue()
           {
-               return (Int32)random.Next();
+               return (Double)random.NextDouble();
           }
 
-          public object generateInt(int value)
+          public Type GetValueType()
           {
-               return (Int32)random.Next(value);
+               return typeof(Double);
           }
      }
 }
