@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace LR2_SPP
 {
-     class Program
+     interface IFaker
      {
-          static void Main(string[] args)
-          {
-               Faker faker = new Faker();
-               
-          }
+          T Create<T>();
      }
 }

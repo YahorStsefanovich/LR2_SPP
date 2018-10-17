@@ -14,10 +14,21 @@ namespace LR2_SPP
           private String pluginName;
           private Assembly assembly;
           private Dictionary<Type, Func<object>> typeDictionary;
+          private CollectionGenerator collectionGenerator;
+          private SystemGenerator dateTimeGenerator;
+          private List<Type> dtoTypeList;
+          private List<Type> cycleList;
+          private Faker faker;
 
           public Generator()
           {
                typeDictionary = new Dictionary<Type, Func<object>>();
+               collectionGenerator = new CollectionGenerator();
+               dateTimeGenerator = new SystemGenerator();
+
+               dtoTypeList = new List<Type>();
+               cycleList = new List<Type>();
+
                pluginName = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Plugins.dll");
                if (!File.Exists(pluginName))
                {
@@ -26,6 +37,32 @@ namespace LR2_SPP
 
                assembly = Assembly.LoadFrom(pluginName);
                typeDictionary = fillDictionary(typeDictionary);
+          }
+
+          public void AddToCycle(Type t)
+          {
+               cycleList.Add(t);
+          }
+
+          public void RemoveFromCycle(Type t)
+          {
+               cycleList.Remove(t);
+          }
+
+          public void SetFaker(Faker faker)
+          {
+               this.faker = faker;
+          }
+
+          public void DTOAddType(Type t)
+          {
+               if (!dtoTypeList.Contains(t))
+                    dtoTypeList.Add(t);
+          }
+
+          public void DTORemoveType(Type t)
+          {
+               dtoTypeList.Remove(t);
           }
 
           private Dictionary<Type, Func<object>> fillDictionary(Dictionary<Type, Func<object>> dictionary)
@@ -39,6 +76,25 @@ namespace LR2_SPP
                     }                  
                }
                return dictionary;              
+          }
+          
+          public object GenerateValue(Type t)
+          {
+               object obj = null;
+               Func<object> generatorDelegate = null;
+
+               if (t.IsGenericType)
+               {
+                    obj = collectionGenerator.generateList(t.GenericTypeArguments[0], this);
+               }
+               else if (typeDictionary.TryGetValue(t, out generatorDelegate))
+                    obj = generatorDelegate.Invoke();
+               else if (dtoTypeList.Contains(t))
+               {
+                    if (!cycleList.Contains(t))
+                         obj = faker.Create(t);
+               }
+               return obj;
           }        
      }
 }

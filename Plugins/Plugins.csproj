@@ -43,6 +43,7 @@
     <Compile Include="GeneratorOfBoolean.cs" />
     <Compile Include="GeneratorOfByte.cs" />
     <Compile Include="GeneratorOfChar.cs" />
+    <Compile Include="GeneratorOfDateTime.cs" />
     <Compile Include="GeneratorOfDouble.cs" />
     <Compile Include="GeneratorOfFloat.cs" />
     <Compile Include="GeneratorOfInt.cs" />

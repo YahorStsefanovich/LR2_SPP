@@ -10,12 +10,29 @@ using System.Threading.Tasks;
 
 namespace LR2_SPP
 {
-     class Faker
-     {          
+     public class Faker : IFaker
+     {
+          private Generator generator;
+
+          public Faker()
+          {
+               generator = new Generator();
+          }
+
+          public void DTOAdd(Type t)
+          {
+               generator.DTOAddType(t);
+          }
+
+          public void DTORemove(Type t)
+          {
+               generator.DTORemoveType(t);
+          }
+
           private ConstructorInfo getConstructorWithMaxParameters(Type type)
           {
                ConstructorInfo[] constructors = type.GetConstructors();
-               ConstructorInfo maxConstructor = constructors[0];
+               ConstructorInfo maxConstructor = null;
                if (constructors.Length > 0)
                {                 
                     int maxLength = maxConstructor.GetParameters().Length;
@@ -27,33 +44,120 @@ namespace LR2_SPP
                               maxConstructor = constructor;
                          }
                     }
-                    return maxConstructor;
                }
-               return null;
+               return maxConstructor;
           }
 
-          public T Create<T>() where T : class, new(){
-               Type type = typeof(T).GetType();
+          private ConstructorInfo getConstructorWithMinParameters(Type t)
+          {
+               ConstructorInfo[] constructors = t.GetConstructors();
+               ConstructorInfo minParamConstructor = null;
 
-               //find constructors with max amount of parameters
-               ConstructorInfo constructor = getConstructorWithMaxParameters(type);
-               if (constructor != null)
-               {                   
-                    object obj = constructor.Invoke(constructor, constructor.GetParameters());
-                    return (T)obj;
+               foreach (ConstructorInfo constructor in constructors)
+               {
+                    int minLength = constructor.GetParameters().Count<ParameterInfo>();
+                    if (minLength == 0)
+                    {
+                         minParamConstructor = constructor;
+                         break;
+                    }
+               }
+               return minParamConstructor;
+          }
+
+          public object CreateByFillingFields(Type t)
+          {
+               object obj = Activator.CreateInstance(t);
+               FieldInfo[] fields = t.GetFields();
+               PropertyInfo[] properties = t.GetProperties();
+
+               foreach (FieldInfo field in fields)
+               {
+                    try
+                    {
+                         field.SetValue(obj, generator.GenerateValue(field.FieldType));
+                    }
+                    catch (FieldAccessException e)
+                    {
+                         
+                    }
+               }
+
+               foreach (PropertyInfo property in properties)
+               {
+                    if (property.CanWrite && property.SetMethod.IsPublic)
+                    {
+                         property.SetValue(obj, generator.GenerateValue(property.PropertyType));
+                    }
+               }
+               return obj;
+          }
+
+          public object CreateByConstructor(ConstructorInfo constructor, Type t)
+          {
+               object[] parametersValues = new object[constructor.GetParameters().Count<ParameterInfo>()];
+               ParameterInfo[] parameters = constructor.GetParameters();
+               object result;
+
+               int i = 0;
+
+               foreach (ParameterInfo parameter in parameters)
+               {
+                    parametersValues[i] = generator.GenerateValue(parameter.ParameterType);
+                    i++;
+               }
+               try
+               {
+                    result = constructor.Invoke(parametersValues);
+               }
+               catch (Exception e)
+               {
+                    
+               }
+               finally
+               {
+                    result = null;
+               }
+
+               return result;
+          }
+
+          public object Create(Type t){
+               object result;
+               ConstructorInfo constructorWithParameters;
+               ConstructorInfo constructorWithoutParameters;
+               int publicFieldCount;
+               int publicPropertiesCount;
+
+               generator.AddToCycle(t);
+               constructorWithParameters = getConstructorWithMaxParameters(t);
+               constructorWithoutParameters = getConstructorWithMinParameters(t);
+
+               publicFieldCount = t.GetFields().Count<FieldInfo>();
+               publicPropertiesCount = t.GetProperties().Count<PropertyInfo>();
+
+               if ((constructorWithParameters == null) || ((constructorWithoutParameters != null)
+                   && (constructorWithParameters.GetParameters().Count<ParameterInfo>() < publicFieldCount + publicPropertiesCount)))
+               {
+                    result = CreateByFillingFields(t);
+                    Console.WriteLine(result.GetType() + " was created by filling fields");
                }
                else
                {
-                    object obj = new T();
-                    //fill in fields with piblic fields 
-                    FieldInfo[] fieldNames = type.GetFields();
-                    foreach (FieldInfo field in fieldNames)
-                    {
-                      
-                    }
-                    return (T)obj;
-               }            
-                                             
-          }          
+                    result = CreateByConstructor(constructorWithParameters, t);
+                    Console.WriteLine(result.GetType() + " was created by constructor with parameters");
+               }
+
+               generator.RemoveFromCycle(t);
+               return result;
+          }
+
+          public T Create<T>()
+          {
+               Type t = typeof(T);
+
+               generator.SetFaker(this);
+               return (T)Create(t);
+          }
      }
 }
