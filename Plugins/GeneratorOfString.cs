@@ -21,12 +21,12 @@ namespace Plugins
                     int pos = random.Next(0, symbols.Length);
                     result.Append(symbols[pos]);
                }
-               return result.ToString();
+               return (String)result.ToString();
           }
 
           public Type GetValueType()
           {
-               return typeof(string);
+               return typeof(String);
           }
      }
 }

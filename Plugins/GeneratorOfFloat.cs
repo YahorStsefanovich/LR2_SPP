@@ -13,12 +13,12 @@ namespace Plugins
 
           public object generateValue()
           {
-               return (float)random.NextDouble();
+               return (Single)random.NextDouble();
           }
 
           public Type GetValueType()
           {
-               return typeof(float);
+               return typeof(Single);
           }
      }
 }

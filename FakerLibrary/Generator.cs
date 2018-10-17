@@ -2,10 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LR2_SPP
 {
@@ -15,7 +12,6 @@ namespace LR2_SPP
           private Assembly assembly;
           private Dictionary<Type, Func<object>> typeDictionary;
           private CollectionGenerator collectionGenerator;
-          private SystemGenerator dateTimeGenerator;
           private List<Type> dtoTypeList;
           private List<Type> cycleList;
           private Faker faker;
@@ -24,7 +20,6 @@ namespace LR2_SPP
           {
                typeDictionary = new Dictionary<Type, Func<object>>();
                collectionGenerator = new CollectionGenerator();
-               dateTimeGenerator = new SystemGenerator();
 
                dtoTypeList = new List<Type>();
                cycleList = new List<Type>();
@@ -54,26 +49,27 @@ namespace LR2_SPP
                this.faker = faker;
           }
 
-          public void DTOAddType(Type t)
+          public void dtoAddType(Type t)
           {
                if (!dtoTypeList.Contains(t))
                     dtoTypeList.Add(t);
           }
 
-          public void DTORemoveType(Type t)
+          public void dtoRemoveType(Type t)
           {
                dtoTypeList.Remove(t);
           }
 
           private Dictionary<Type, Func<object>> fillDictionary(Dictionary<Type, Func<object>> dictionary)
           {
-               foreach (Type type in assembly.GetExportedTypes())
+               foreach (var type in assembly.GetTypes())
                {
-                    if (type.IsClass && typeof(IGenerator).IsAssignableFrom(type))
+                    if (type.GetInterface(typeof(IGenerator).ToString()) != null)
                     {
                          var plugin = assembly.CreateInstance(type.FullName) as IGenerator;
-                         dictionary.Add(plugin.GetValueType(), plugin.generateValue);
-                    }                  
+                         if (!dictionary.ContainsKey(plugin.GetValueType()))
+                              dictionary.Add(plugin.GetValueType(), plugin.generateValue);
+                    }
                }
                return dictionary;              
           }

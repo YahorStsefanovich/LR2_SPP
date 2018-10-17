@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins", "Plugins\Plugins.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginInterfaces", "PluginInterfaces\PluginInterfaces.csproj", "{B0097A27-D23C-4088-839B-CFB953610A4D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakerTest", "FakerTest\FakerTest.csproj", "{C6C1A607-38B8-4D40-B382-39B1F2DD38F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakerLibrary", "FakerLibrary\FakerLibrary.csproj", "{9C5B9F09-F229-43E0-AAB0-009A827E1415}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{B0097A27-D23C-4088-839B-CFB953610A4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0097A27-D23C-4088-839B-CFB953610A4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0097A27-D23C-4088-839B-CFB953610A4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6C1A607-38B8-4D40-B382-39B1F2DD38F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6C1A607-38B8-4D40-B382-39B1F2DD38F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6C1A607-38B8-4D40-B382-39B1F2DD38F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6C1A607-38B8-4D40-B382-39B1F2DD38F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C5B9F09-F229-43E0-AAB0-009A827E1415}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C5B9F09-F229-43E0-AAB0-009A827E1415}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C5B9F09-F229-43E0-AAB0-009A827E1415}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C5B9F09-F229-43E0-AAB0-009A827E1415}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

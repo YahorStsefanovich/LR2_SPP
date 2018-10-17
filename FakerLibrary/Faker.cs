@@ -19,14 +19,14 @@ namespace LR2_SPP
                generator = new Generator();
           }
 
-          public void DTOAdd(Type t)
+          public void dtoAdd(Type t)
           {
-               generator.DTOAddType(t);
+               generator.dtoAddType(t);
           }
 
-          public void DTORemove(Type t)
+          public void dtoRemove(Type t)
           {
-               generator.DTORemoveType(t);
+               generator.dtoRemoveType(t);
           }
 
           private ConstructorInfo getConstructorWithMaxParameters(Type type)
@@ -35,7 +35,7 @@ namespace LR2_SPP
                ConstructorInfo maxConstructor = null;
                if (constructors.Length > 0)
                {                 
-                    int maxLength = maxConstructor.GetParameters().Length;
+                    int maxLength = 0;
                     foreach (ConstructorInfo constructor in constructors)
                     {
                          if (constructor.GetParameters().Length > maxLength)
@@ -112,10 +112,6 @@ namespace LR2_SPP
                }
                catch (Exception e)
                {
-                    
-               }
-               finally
-               {
                     result = null;
                }
 
@@ -155,7 +151,6 @@ namespace LR2_SPP
           public T Create<T>()
           {
                Type t = typeof(T);
-
                generator.SetFaker(this);
                return (T)Create(t);
           }

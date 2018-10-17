@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ED31D6FA-9055-4A8C-BF09-EDB9629028EA}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{9C5B9F09-F229-43E0-AAB0-009A827E1415}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LR2_SPP</RootNamespace>
-    <AssemblyName>LR2_SPP</AssemblyName>
+    <RootNamespace>FakerLibrary</RootNamespace>
+    <AssemblyName>FakerLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,20 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bar.cs" />
-    <Compile Include="Foo.cs" />
+    <Compile Include="CollectionGenerator.cs" />
+    <Compile Include="ConsoleWriter.cs" />
+    <Compile Include="Faker.cs" />
+    <Compile Include="Generator.cs" />
+    <Compile Include="IFaker.cs" />
+    <Compile Include="InvalidPluginPathException.cs" />
+    <Compile Include="IWriter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestClass.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FakerLibrary\FakerLibrary.csproj">
-      <Project>{9C5B9F09-F229-43E0-AAB0-009A827E1415}</Project>
-      <Name>FakerLibrary</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PluginInterfaces\PluginInterfaces.csproj">
       <Project>{b0097a27-d23c-4088-839b-cfb953610a4d}</Project>
       <Name>PluginInterfaces</Name>

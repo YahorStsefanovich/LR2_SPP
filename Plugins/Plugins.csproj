@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\LR2_SPP\bin\Debug\</OutputPath>
+    <OutputPath>..\FakerLibrary\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -50,7 +50,6 @@
     <Compile Include="GeneratorOfLong.cs" />
     <Compile Include="GeneratorOfShort.cs" />
     <Compile Include="GeneratorOfString.cs" />
-    <Compile Include="Plugins.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
