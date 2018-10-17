@@ -50,8 +50,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="FakerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FakerLibrary\FakerLibrary.csproj">
+      <Project>{9C5B9F09-F229-43E0-AAB0-009A827E1415}</Project>
+      <Name>FakerLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LR2_SPP\LR2_SPP.csproj">
+      <Project>{ed31d6fa-9055-4a8c-bf09-edb9629028ea}</Project>
+      <Name>LR2_SPP</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

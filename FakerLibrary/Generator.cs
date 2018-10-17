@@ -23,14 +23,17 @@ namespace LR2_SPP
 
                dtoTypeList = new List<Type>();
                cycleList = new List<Type>();
+               //string a = Assembly.GetEntryAssembly().Location;
+               //string b = Path.GetDirectoryName(a);
 
-               pluginName = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Plugins.dll");
+               //pluginName = Path.Combine(b, "Plugins.dll");
+               pluginName = "D:\\LR\\sem5(NOW)\\SPP\\LR2_SPP\\LR2_SPP\\LR2_SPP\\bin\\Debug\\Plugins.dll";
                if (!File.Exists(pluginName))
                {
                     throw new InvalidPluginPathException("Wrong plugin's path");
                }
 
-               assembly = Assembly.LoadFrom(pluginName);
+               assembly = Assembly.LoadFile(pluginName);
                typeDictionary = fillDictionary(typeDictionary);
           }
 

@@ -9,9 +9,7 @@ namespace LR2_SPP
      public class TestClass
      {
           private int fieldPrivateInt;
-          public bool[] mass;
           public List<int> list;
-          public List<byte>[] arrayOfList;
           public Foo foo;
           public Bar bar;
           public int fieldInt;

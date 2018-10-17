@@ -110,7 +110,11 @@ namespace LR2_SPP
                {
                     result = constructor.Invoke(parametersValues);
                }
-               catch (Exception e)
+               catch (OutOfMemoryException e)
+               {
+                    result = null;
+               }
+               catch (OverflowException e)
                {
                     result = null;
                }

@@ -12,7 +12,7 @@ namespace LR2_SPP
           static void Main(string[] args)
           {
                Faker faker = new Faker();
-               TestClass test;
+               TestClass test,test2;
                ConsoleWriter printer;
 
                faker.dtoAdd(typeof(Foo));
@@ -23,6 +23,7 @@ namespace LR2_SPP
                printer.dtoListAdd(typeof(Foo));
                printer.dtoListAdd(typeof(Bar));
                printer.Print(test, "");
+               
           }
      }
 }

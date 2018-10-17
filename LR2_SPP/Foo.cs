@@ -10,7 +10,7 @@ namespace LR2_SPP
      {
           public string fieldString;
           public TestClass fieldTest;
-          public Bar _fieldBar;
+          public Bar fieldBar;
 
           public string str { get; set; }
 
