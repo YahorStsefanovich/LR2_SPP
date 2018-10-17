@@ -23,43 +23,43 @@ namespace FakerTest
           [TestMethod]
           public void ShortGeneratorTest()
           {
-               Assert.IsTrue(result.fieldShort >= short.MinValue && result.fieldShort <= short.MaxValue);
+               Assert.AreNotEqual(result.fieldShort, 0);
           }
 
           [TestMethod]
           public void IntGeneratorTest()
           {
-               Assert.IsTrue(result.fieldInt >= int.MinValue && result.fieldInt <= int.MaxValue);
+               Assert.AreNotEqual(result.fieldInt, 0);
           }
 
           [TestMethod]
           public void LongGeneratorTest()
           {
-               Assert.IsTrue(result.fieldLong >= long.MinValue && result.fieldLong <= long.MaxValue);
+               Assert.AreNotEqual(result.fieldLong, 0);
           }
 
           [TestMethod]
           public void FloatGeneratorTest()
           {
-               Assert.IsTrue(result.fieldFloat >= float.MinValue && result.fieldFloat <= float.MaxValue);
+               Assert.AreNotEqual(result.fieldFloat, 0);
           }
           
           [TestMethod]
           public void ByteGeneratorTest()
           {
-               Assert.IsTrue(result.fieldByte >= byte.MinValue && result.fieldByte <= byte.MaxValue);
+               Assert.AreNotEqual(result.fieldByte, 0);
           }
          
           [TestMethod]
           public void BoolGeneratorTest()
           {
-               Assert.IsTrue(result.fieldBool == true || result.fieldBool == false);
+               Assert.AreNotEqual(result.fieldBool, null);
           }
 
           [TestMethod]
           public void CharGeneratorTest()
           {
-               Assert.IsTrue((result.propertyChar >= char.MinValue) && (result.propertyChar <= char.MaxValue));
+               Assert.AreNotEqual(result.propertyChar, 0);
           }
 
           [TestMethod]

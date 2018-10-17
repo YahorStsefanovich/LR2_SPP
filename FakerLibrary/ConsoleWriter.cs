@@ -55,7 +55,7 @@ namespace LR2_SPP
                for (int i = 0; i < list.Count; i++)
                {
                     value = list[i];
-                    Console.Write(string.Format("{0}<{1}>", indent, i));
+                    Console.Write(string.Format("{0}[1]>", indent, i));
                     if (value.GetType().IsArray || value.GetType().IsGenericType)
                     {
                          PrintValue(value, indent + "    ");
@@ -96,7 +96,7 @@ namespace LR2_SPP
                     FieldInfo[] fields = t.GetFields();
                     foreach (FieldInfo field in fields)
                     {
-                         Console.Write(string.Format("{0}- {1}  {2}  ", indent, field.FieldType.ToString(), field.Name));
+                         Console.Write(string.Format("{0}: {1} , {2}  ", indent, field.FieldType.ToString(), field.Name));
                          PrintValue(field.GetValue(obj), indent);
                     }
 
@@ -106,7 +106,7 @@ namespace LR2_SPP
                     {
                          if (property.CanWrite && property.SetMethod.IsPublic)
                          {
-                              Console.Write(string.Format("{0}- {1}  {2}  ", indent, property.PropertyType.ToString(), property.Name));
+                              Console.Write(string.Format("{0}: {1},  {2}  ", indent, property.PropertyType.ToString(), property.Name));
                               PrintValue(property.GetValue(obj), indent);
                          }
                     }
