@@ -23,7 +23,7 @@ namespace LR2_SPP
 
                dtoTypeList = new List<Type>();
                cycleList = new List<Type>();
-               //string a = Assembly.GetEntryAssembly().Location;
+              /// string a = Assembly.GetEntryAssembly().Location;
                //string b = Path.GetDirectoryName(a);
 
                //pluginName = Path.Combine(b, "Plugins.dll");
@@ -80,19 +80,18 @@ namespace LR2_SPP
           public object GenerateValue(Type t)
           {
                object obj = null;
-               Func<object> generatorDelegate = null;
+               Func<object> generatorFunc = null;
 
                if (t.IsGenericType)
                {
                     obj = collectionGenerator.generateList(t.GenericTypeArguments[0], this);
                }
-               else if (typeDictionary.TryGetValue(t, out generatorDelegate))
-                    obj = generatorDelegate.Invoke();
-               else if (dtoTypeList.Contains(t))
-               {
-                    if (!cycleList.Contains(t))
-                         obj = faker.Create(t);
-               }
+               else if (typeDictionary.TryGetValue(t, out generatorFunc))
+                    obj = generatorFunc.Invoke();
+               else if (!cycleList.Contains(t))
+               {              
+                    obj = faker.Create(t);
+               } 
                return obj;
           }        
      }

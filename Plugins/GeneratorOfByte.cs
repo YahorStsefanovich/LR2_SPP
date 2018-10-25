@@ -13,7 +13,11 @@ namespace Plugins
 
           public object generateValue()
           {
-               return (Byte)random.Next();
+               Byte result;
+               do {
+                    result = (Byte)random.Next();
+               } while (result == 0);   
+               return result;
           }
 
           public Type GetValueType()

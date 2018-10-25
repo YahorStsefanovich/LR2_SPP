@@ -41,13 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollectionGenerator.cs" />
-    <Compile Include="ConsoleWriter.cs" />
     <Compile Include="Faker.cs" />
     <Compile Include="Generator.cs" />
     <Compile Include="IFaker.cs" />
     <Compile Include="InvalidPluginPathException.cs" />
-    <Compile Include="IWriter.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

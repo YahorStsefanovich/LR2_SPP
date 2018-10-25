@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace LR2_SPP
 {
-     interface IWriter
+     public class TestClass1
      {
-          void Print(object obj, string indent);
+          public TestClass1() {
+
+          }
+
+          public Foo foo1;
+          public Foo foo2;
+          
      }
 }

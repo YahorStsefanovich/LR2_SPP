@@ -21,6 +21,13 @@ namespace FakerTest
           }
 
           [TestMethod]
+          public void TwoSameTypesObject()
+          {
+               TestClass1 test1 = faker.Create<TestClass1>();
+               Assert.AreNotEqual(test1.foo1, test1.foo2); 
+          }
+
+          [TestMethod]
           public void ShortGeneratorTest()
           {
                Assert.AreNotEqual(result.fieldShort, 0);

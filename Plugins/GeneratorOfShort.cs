@@ -13,6 +13,11 @@ namespace Plugins
 
           public object generateValue()
           {
+               int result;
+               do
+               {
+                    result = random.Next();
+               } while (result == 0);
                return (Int16)random.Next();
           }
 

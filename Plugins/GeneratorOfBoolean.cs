@@ -13,10 +13,6 @@ namespace Plugins
 
           public object generateValue()
           {
-               if (random.Next() % 2 == 0)
-               {
-                    return (Boolean)false;
-               }
                return (Boolean)true;
           }
 
