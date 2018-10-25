@@ -12,7 +12,6 @@ namespace LR2_SPP
           private Assembly assembly;
           private Dictionary<Type, Func<object>> typeDictionary;
           private CollectionGenerator collectionGenerator;
-          private List<Type> dtoTypeList;
           private List<Type> cycleList;
           private Faker faker;
 
@@ -21,13 +20,12 @@ namespace LR2_SPP
                typeDictionary = new Dictionary<Type, Func<object>>();
                collectionGenerator = new CollectionGenerator();
 
-               dtoTypeList = new List<Type>();
                cycleList = new List<Type>();
-              /// string a = Assembly.GetEntryAssembly().Location;
+              // string a = Assembly.GetEntryAssembly().Location;
                //string b = Path.GetDirectoryName(a);
 
-               //pluginName = Path.Combine(b, "Plugins.dll");
-               pluginName = "D:\\LR\\sem5(NOW)\\SPP\\LR2_SPP\\LR2_SPP\\LR2_SPP\\bin\\Debug\\Plugins.dll";
+              // pluginName = Path.Combine(b, "Plugins.dll");
+               pluginName = "D:\\LR\\sem5(NOW)\\SPP\\LR2_SPP\\LR2_SPP\\FakerLibrary\\bin\\Debug\\Plugins.dll";
                if (!File.Exists(pluginName))
                {
                     throw new InvalidPluginPathException("Wrong plugin's path");
@@ -50,17 +48,6 @@ namespace LR2_SPP
           public void SetFaker(Faker faker)
           {
                this.faker = faker;
-          }
-
-          public void dtoAddType(Type t)
-          {
-               if (!dtoTypeList.Contains(t))
-                    dtoTypeList.Add(t);
-          }
-
-          public void dtoRemoveType(Type t)
-          {
-               dtoTypeList.Remove(t);
           }
 
           private Dictionary<Type, Func<object>> fillDictionary(Dictionary<Type, Func<object>> dictionary)

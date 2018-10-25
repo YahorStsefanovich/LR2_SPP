@@ -9,22 +9,26 @@ namespace FakerTest
      public class FakerTests
      {
           private Faker faker;
-          private TestClass result; 
+          private TestClass result;
+          private TestClass1 test1;
 
           [TestInitialize]
           public void SetUp()
           {
                faker = new Faker();
-               faker.dtoAdd(typeof(Foo));
-               faker.dtoAdd(typeof(Bar));
                result = faker.Create<TestClass>();
+               test1 = faker.Create<TestClass1>();
           }
 
           [TestMethod]
           public void TwoSameTypesObject()
           {
-               TestClass1 test1 = faker.Create<TestClass1>();
-               Assert.AreNotEqual(test1.foo1, test1.foo2); 
+               Assert.AreNotEqual(test1.foo1, test1.foo2);
+               Assert.IsTrue(test1.foo1.fieldBar.fieldBool);
+               Assert.AreNotEqual(test1.foo2.fieldBar.fieldDate, null);
+               Assert.AreNotEqual(test1.foo1.fieldString, test1.foo2.fieldString);
+               Assert.AreEqual(test1.foo1.fieldTest.foo, null);
+               Assert.AreEqual(test1.foo1.fieldTest.bar.fieldFoo, null);
           }
 
           [TestMethod]
@@ -60,7 +64,7 @@ namespace FakerTest
           [TestMethod]
           public void BoolGeneratorTest()
           {
-               Assert.AreNotEqual(result.fieldBool, null);
+               Assert.IsTrue(result.fieldBool);
           }
 
           [TestMethod]
@@ -85,16 +89,6 @@ namespace FakerTest
           public void ListGeneratorTest()
           {
                Assert.IsTrue(result.list != null && result.list is List<int>);
-          }
-
-
-          [TestMethod]
-          public void NestingTest()
-          {
-               Assert.IsTrue(result.foo != null);
-               Assert.IsTrue(result.foo.fieldBar != null);
-               Assert.IsTrue(result.bar != null);
-               Assert.IsTrue(result.bar.fieldFoo != null);
           }
 
           [TestMethod]

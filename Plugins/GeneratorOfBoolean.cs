@@ -9,7 +9,6 @@ namespace Plugins
 {
      class GeneratorOfBoolean : IGenerator
      {
-          private Random random = new Random((int)DateTime.Now.Ticks);
 
           public object generateValue()
           {

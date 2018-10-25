@@ -11,7 +11,9 @@ namespace LR2_SPP
      {
           static void Main(string[] args)
           {
-               
+               Faker faker = new Faker();
+
+               TestClass result = faker.Create<TestClass>();
           }
      }
 }

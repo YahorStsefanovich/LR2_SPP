@@ -19,16 +19,6 @@ namespace LR2_SPP
                generator = new Generator();
           }
 
-          public void dtoAdd(Type t)
-          {
-               generator.dtoAddType(t);
-          }
-
-          public void dtoRemove(Type t)
-          {
-               generator.dtoRemoveType(t);
-          }
-
           private ConstructorInfo getConstructorWithMaxParameters(Type type)
           {
                ConstructorInfo[] constructors = type.GetConstructors();
